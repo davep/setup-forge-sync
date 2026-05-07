@@ -24,9 +24,6 @@ git remote set-url --push origin "git@github.com:davep/${REPO_NAME}.git"
 git remote set-url --add --push origin "git@gitlab.com:davep/${REPO_NAME}.git"
 git remote set-url --add --push origin "ssh://git@codeberg.org/davep/${REPO_NAME}.git"
 
-# Add GitHub back as the final push URL so all three are in the 'push' list
-git remote set-url --add --push origin "git@github.com:davep/${REPO_NAME}.git"
-
 echo "----------------------------------------------------"
 echo "Success! Your 'origin' remote is now configured:"
 git remote -v
