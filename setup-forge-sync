@@ -17,10 +17,10 @@ fi
 
 echo "Configuring multi-forge sync for: $REPO_NAME"
 
-# Set the first push URL to GitHub (this clears the default behavior)
+# Set the first push URL to GitHub.
 git remote set-url --push origin "git@github.com:davep/${REPO_NAME}.git"
 
-# Add GitLab and Codeberg as additional push URLs
+# Add GitLab and Codeberg as additional push URLs.
 git remote set-url --add --push origin "git@gitlab.com:davep/${REPO_NAME}.git"
 git remote set-url --add --push origin "ssh://git@codeberg.org/davep/${REPO_NAME}.git"
 
