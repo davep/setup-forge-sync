@@ -15,19 +15,23 @@ if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
     exit 1
 fi
 
-echo "Configuring multi-forge sync for: $REPO_NAME"
+echo "Configuring multi-forge backup sync for: $REPO_NAME"
 
-# Set the first push URL to GitHub.
-git remote set-url --push origin "git@github.com:davep/${REPO_NAME}.git"
+# Set up the remote called backups. Anchor it to Codeberg.
+git remote remove backups > /dev/null 2>&1
+git remote add backups "ssh://git@codeberg.org/davep/${REPO_NAME}.git"
 
-# Add GitLab and Codeberg as additional push URLs.
-git remote set-url --add --push origin "git@gitlab.com:davep/${REPO_NAME}.git"
-git remote set-url --add --push origin "ssh://git@codeberg.org/davep/${REPO_NAME}.git"
+# Set up the push URLs.
+git remote set-url --push backups "ssh://git@codeberg.org/davep/${REPO_NAME}.git"
+git remote set-url --add --push backups "git@gitlab.com:davep/${REPO_NAME}.git"
+
+# Only ever backup main.
+git config remote.backups.push refs/heads/main:refs/heads/main
 
 echo "----------------------------------------------------"
-echo "Success! Your 'origin' remote is now configured:"
+echo "Backups configured:"
 git remote -v
 echo "----------------------------------------------------"
-echo "To perform the initial sync, run: git push -u origin main"
+echo "To perform the initial sync, run: git push backups main"
 
 ### setup-forge-sync ends here
