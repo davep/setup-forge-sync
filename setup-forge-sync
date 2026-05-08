@@ -28,6 +28,9 @@ git remote set-url --add --push backups "git@gitlab.com:davep/${REPO_NAME}.git"
 # Only ever backup main.
 git config remote.backups.push refs/heads/main:refs/heads/main
 
+# Also backup all tags.
+git config --add remote.backups.push 'refs/tags/*:refs/tags/*'
+
 echo "----------------------------------------------------"
 echo "Backups configured:"
 git remote -v
