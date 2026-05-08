@@ -35,6 +35,6 @@ echo "----------------------------------------------------"
 echo "Backups configured:"
 git remote -v
 echo "----------------------------------------------------"
-echo "To perform the initial sync, run: git push backups main"
+echo "To perform the initial sync, run: git push backups"
 
 ### setup-forge-sync ends here
